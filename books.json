@@ -1,0 +1,66 @@
+[
+    {
+        "ID": 1,
+        "TITLE": "Le Petit Prince",
+        "AUTHOR": "Antoine de Saint-Exupéry",
+        "ISBN": "978-0156013987",
+        "YEAR": 1943,
+        "DISPONIBILITY": true
+    },
+    {
+        "ID": 2,
+        "TITLE": "L'Étranger",
+        "AUTHOR": "Albert Camus",
+        "ISBN": "978-2070360024",
+        "YEAR": 1942,
+        "DISPONIBILITY": true
+    },
+    {
+        "ID": 3,
+        "TITLE": "1984",
+        "AUTHOR": "George Orwell",
+        "ISBN": "978-0451524935",
+        "YEAR": 1949,
+        "DISPONIBILITY": true
+    },
+    {
+        "ID": 4,
+        "TITLE": "Harry Potter à l'école des sorciers",
+        "AUTHOR": "J.K. Rowling",
+        "ISBN": "978-0747532699",
+        "YEAR": 1997,
+        "DISPONIBILITY": true
+    },
+    {
+        "ID": 5,
+        "TITLE": "Les Misérables",
+        "AUTHOR": "Victor Hugo",
+        "ISBN": "978-2070409181",
+        "YEAR": 1862,
+        "DISPONIBILITY": true
+    },
+    {
+        "ID": 6,
+        "TITLE": "A Song of Ice and Fire",
+        "AUTHOR": "George R.R. Martin",
+        "ISBN": "978-0553103540",
+        "YEAR": 1996,
+        "DISPONIBILITY": true
+    },
+    {
+        "ID": 7,
+        "TITLE": "Red Rising",
+        "AUTHOR": "Pierce Brown",
+        "ISBN": "978-0345539786",
+        "YEAR": 2014,
+        "DISPONIBILITY": true
+    },
+    {
+        "ID": 8,
+        "TITLE": "Arsène Lupin, gentleman cambrioleur",
+        "AUTHOR": "Maurice Leblanc",
+        "ISBN": "978-2253006329",
+        "YEAR": 1907,
+        "DISPONIBILITY": true
+    }
+]
