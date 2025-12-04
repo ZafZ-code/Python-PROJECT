@@ -1,66 +1,146 @@
 [
     {
-        "ID": 1,
-        "TITLE": "Le Petit Prince",
-        "AUTHOR": "Antoine de Saint-Exupéry",
-        "ISBN": "978-0156013987",
-        "YEAR": 1943,
-        "DISPONIBILITY": true
+        "title": "Clean Code",
+        "author": "Robert C. Martin",
+        "isbn": "978-0132350884",
+        "year": 2008,
+        "disponibility": false,
+        "reservations": [],
+        "borrow_count": 2
     },
     {
-        "ID": 2,
-        "TITLE": "L'Étranger",
-        "AUTHOR": "Albert Camus",
-        "ISBN": "978-2070360024",
-        "YEAR": 1942,
-        "DISPONIBILITY": true
+        "title": "Harry Potter",
+        "author": "J.K. Rowling",
+        "isbn": "978-0747532699",
+        "year": 1997,
+        "disponibility": true,
+        "reservations": [],
+        "borrow_count": 10
     },
     {
-        "ID": 3,
-        "TITLE": "1984",
-        "AUTHOR": "George Orwell",
-        "ISBN": "978-0451524935",
-        "YEAR": 1949,
-        "DISPONIBILITY": true
+        "title": "The Hobbit",
+        "author": "J.R.R. Tolkien",
+        "isbn": "978-0618260281",
+        "year": 1937,
+        "disponibility": false,
+        "reservations": [],
+        "borrow_count": 1
     },
     {
-        "ID": 4,
-        "TITLE": "Harry Potter à l'école des sorciers",
-        "AUTHOR": "J.K. Rowling",
-        "ISBN": "978-0747532699",
-        "YEAR": 1997,
-        "DISPONIBILITY": true
+        "title": "Sherlock Holmes",
+        "author": "Arthur Conan Doyle",
+        "isbn": "978-0486419731",
+        "year": 1892,
+        "disponibility": true,
+        "reservations": [],
+        "borrow_count": 7
     },
     {
-        "ID": 5,
-        "TITLE": "Les Misérables",
-        "AUTHOR": "Victor Hugo",
-        "ISBN": "978-2070409181",
-        "YEAR": 1862,
-        "DISPONIBILITY": true
+        "title": "Atomic Habits",
+        "author": "James Clear",
+        "isbn": "978-0735211292",
+        "year": 2018,
+        "disponibility": false,
+        "reservations": [],
+        "borrow_count": 1
     },
     {
-        "ID": 6,
-        "TITLE": "A Song of Ice and Fire",
-        "AUTHOR": "George R.R. Martin",
-        "ISBN": "978-0553103540",
-        "YEAR": 1996,
-        "DISPONIBILITY": true
+        "title": "The Alchemist",
+        "author": "Paulo Coelho",
+        "isbn": "978-0061122415",
+        "year": 1988,
+        "disponibility": false,
+        "reservations": [],
+        "borrow_count": 1
     },
     {
-        "ID": 7,
-        "TITLE": "Red Rising",
-        "AUTHOR": "Pierce Brown",
-        "ISBN": "978-0345539786",
-        "YEAR": 2014,
-        "DISPONIBILITY": true
+        "title": "Dune",
+        "author": "Frank Herbert",
+        "isbn": "978-0441172719",
+        "year": 1965,
+        "disponibility": true,
+        "reservations": [],
+        "borrow_count": 1
     },
     {
-        "ID": 8,
-        "TITLE": "Arsène Lupin, gentleman cambrioleur",
-        "AUTHOR": "Maurice Leblanc",
-        "ISBN": "978-2253006329",
-        "YEAR": 1907,
-        "DISPONIBILITY": true
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "isbn": "978-0743273565",
+        "year": 1925,
+        "disponibility": false,
+        "reservations": [],
+        "borrow_count": 1
+    },
+    {
+        "title": "The Da Vinci Code",
+        "author": "Dan Brown",
+        "isbn": "978-0307474278",
+        "year": 2003,
+        "disponibility": true,
+        "reservations": [],
+        "borrow_count": 1
+    },
+    {
+        "title": "1984",
+        "author": "George Orwell",
+        "isbn": "978-0451524935",
+        "year": 1949,
+        "disponibility": false,
+        "reservations": [],
+        "borrow_count": 1
+    },
+    {
+        "title": "The Power of Habit",
+        "author": "Charles Duhigg",
+        "isbn": "978-0812981605",
+        "year": 2012,
+        "disponibility": false,
+        "reservations": [],
+        "borrow_count": 1
+    },
+    {
+        "title": "Spider-Man: The Novel",
+        "author": "Peter David",
+        "isbn": "978-1984817559",
+        "year": 2021,
+        "disponibility": false,
+        "reservations": [],
+        "borrow_count": 1
+    },
+    {
+        "title": "Jumanji",
+        "author": "Chris Van Allsburg",
+        "isbn": "978-0547372338",
+        "year": 1981,
+        "disponibility": false,
+        "reservations": [],
+        "borrow_count": 1
+    },
+    {
+        "title": "James Bond: Casino Royale",
+        "author": "Ian Fleming",
+        "isbn": "978-0141045233",
+        "year": 1953,
+        "disponibility": true,
+        "reservations": [],
+        "borrow_count": 5
+    },
+    {
+        "title": "The Lord of the Rings",
+        "author": "J.R.R. Tolkien",
+        "isbn": "978-0618517657",
+        "year": 1954,
+        "disponibility": false,
+        "reservations": [],
+        "borrow_count": 3
+    },
+    {
+        "title": "a song of ice and fire",
+        "author": "george r.r martin",
+        "isbn": "978-0553103540",
+        "year": 1996,
+        "disponibility": true,
+        "reservations": [],
+        "borrow_count": 15
     }
 ]
