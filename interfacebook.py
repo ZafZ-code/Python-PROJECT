@@ -8,9 +8,15 @@ from datetime import datetime
 # initialise manager
 mgr = LibraryManager()
 
+BUTTON_BG = "#2a6fdb"  # Blue for main buttons
+BUTTON_FG = "white"   # White text
+HEADER_BG = "#0077c9"  # Darker Blue for Treeview headers
+HEADER_FG = "white"
+PRIMARY_COLOR = "#4CAF50" # Green for main action (e.g., Add)
+DANGER_COLOR = "#E53935"
 
 def format_book_row(book):
-    return (book.title, book.author, book.isbn, book.year, str(book.disponibility), ", ".join(book.reservations))
+    return (book.title, book.author, book.isbn, book.year, str(book.disponibility), book.borrow_count, ", ".join(book.reservations))
 
 
 def format_member_row(member):
@@ -25,6 +31,18 @@ app = tk.Tk()
 app.title("Gestion Bibliothèque")
 app.geometry("1000x650")
 
+style = ttk.Style(app)
+style.theme_use('default') # Use a default theme as a base
+
+# Configure the Treeview Heading style
+style.configure("Treeview.Heading", 
+                background=HEADER_BG, 
+                foreground=HEADER_FG, 
+                font=('Arial', 10, 'bold'))
+# Configure the Treeview style (for rows)
+style.configure("Treeview", 
+                rowheight=25)
+
 nb = ttk.Notebook(app)
 nb.pack(fill="both", expand=True)
 
@@ -32,11 +50,11 @@ nb.pack(fill="both", expand=True)
 tab_books = ttk.Frame(nb)
 nb.add(tab_books, text="Livres")
 
-books_cols = ("Titre", "Auteur", "ISBN", "Année", "Disponible", "Réservations")
+books_cols = ("Titre", "Auteur", "ISBN", "Année", "Disponible", "N° Emprunte", "Réservations")
 tree_books = ttk.Treeview(tab_books, columns=books_cols, show="headings")
 for c in books_cols:
-    tree_books.heading(c, text=c)
-    tree_books.column(c, width=140)
+    tree_books.heading(c, text=c, anchor="center")
+    tree_books.column(c, width=140, anchor="center")
 tree_books.pack(fill="both", expand=True, padx=10, pady=10)
 
 def refresh_books():
@@ -62,7 +80,7 @@ def add_book_window():
             w.destroy()
         except Exception as ex:
             messagebox.showerror("Erreur", str(ex))
-    tk.Button(w, text="Ajouter", command=on_add).grid(row=len(labels), column=0, columnspan=2, pady=8)
+    tk.Button(w, text="Ajouter", bg=PRIMARY_COLOR, fg=BUTTON_FG, command=on_add).grid(row=len(labels), column=0, columnspan=2, pady=8)
 
 def delete_book():
     sel = tree_books.selection()
@@ -80,9 +98,9 @@ def delete_book():
 
 btn_frame_books = tk.Frame(tab_books)
 btn_frame_books.pack(pady=6)
-tk.Button(btn_frame_books, text="Ajouter livre", command=add_book_window).pack(side="left", padx=6)
-tk.Button(btn_frame_books, text="Supprimer livre", command=delete_book).pack(side="left", padx=6)
-tk.Button(btn_frame_books, text="Rechercher", command=lambda: search_book_window()).pack(side="left", padx=6)
+tk.Button(btn_frame_books, text="Ajouter livre", command=add_book_window, bg=PRIMARY_COLOR, fg=BUTTON_FG).pack(side="left", padx=6)
+tk.Button(btn_frame_books, text="Supprimer livre", command=delete_book, bg=DANGER_COLOR, fg=BUTTON_FG).pack(side="left", padx=6)
+tk.Button(btn_frame_books, text="Rechercher", command=lambda: search_book_window(), bg=BUTTON_BG, fg=BUTTON_FG).pack(side="left", padx=6)
 
 def search_book_window():
     q = simpledialog.askstring("Recherche livre", "Titre / Auteur / ISBN :")
@@ -99,8 +117,8 @@ nb.add(tab_members, text="Membres")
 mem_cols = ("Nom","Prénom","Email","Téléphone","Date inscription")
 tree_members = ttk.Treeview(tab_members, columns=mem_cols, show="headings")
 for c in mem_cols:
-    tree_members.heading(c, text=c)
-    tree_members.column(c, width=160)
+    tree_members.heading(c, text=c, anchor="center")
+    tree_members.column(c, width=160, anchor="center")
 tree_members.pack(fill="both", expand=True, padx=10, pady=10)
 
 def refresh_members():
@@ -126,7 +144,7 @@ def add_member_window():
             w.destroy()
         except Exception as ex:
             messagebox.showerror("Erreur", str(ex))
-    tk.Button(w, text="Ajouter", command=on_add).grid(row=len(labels), column=0, columnspan=2, pady=8)
+    tk.Button(w, text="Ajouter", bg=PRIMARY_COLOR, fg=BUTTON_FG, command=on_add).grid(row=len(labels), column=0, columnspan=2, pady=8)
 
 def delete_member():
     sel = tree_members.selection()
@@ -144,8 +162,8 @@ def delete_member():
 
 btn_frame_mem = tk.Frame(tab_members)
 btn_frame_mem.pack(pady=6)
-tk.Button(btn_frame_mem, text="Ajouter membre", command=add_member_window).pack(side="left", padx=6)
-tk.Button(btn_frame_mem, text="Supprimer membre", command=delete_member).pack(side="left", padx=6)
+tk.Button(btn_frame_mem, text="Ajouter membre", command=add_member_window, bg=PRIMARY_COLOR, fg=BUTTON_FG).pack(side="left", padx=6)
+tk.Button(btn_frame_mem, text="Supprimer membre", command=delete_member, bg=DANGER_COLOR, fg=BUTTON_FG).pack(side="left", padx=6)
 
 # --- Emprunts Tab ---
 tab_emprunts = ttk.Frame(nb)
@@ -154,8 +172,8 @@ nb.add(tab_emprunts, text="Emprunts")
 emp_cols = ("ID","ISBN","Email membre","Date emprunt","Date due","Date retour","Statut")
 tree_emprunts = ttk.Treeview(tab_emprunts, columns=emp_cols, show="headings")
 for c in emp_cols:
-    tree_emprunts.heading(c, text=c)
-    tree_emprunts.column(c, width=140)
+    tree_emprunts.heading(c, text=c, anchor="center")
+    tree_emprunts.column(c, width=140, anchor="center")
 tree_emprunts.pack(fill="both", expand=True, padx=10, pady=10)
 
 def refresh_emprunts():
@@ -195,7 +213,7 @@ def borrow_window():
             w.destroy()
         except Exception as ex:
             messagebox.showerror("Erreur", str(ex))
-    tk.Button(w, text="Emprunter", command=on_borrow).grid(row=len(labels), column=0, columnspan=2, pady=8)
+    tk.Button(w, text="Emprunter", command=on_borrow, bg=PRIMARY_COLOR, fg=BUTTON_FG).grid(row=len(labels), column=0, columnspan=2, pady=8)
 
 def return_window():
     w = tk.Toplevel(app)
@@ -216,12 +234,12 @@ def return_window():
             w.destroy()
         except Exception as ex:
             messagebox.showerror("Erreur", str(ex))
-    tk.Button(w, text="Retourner", command=on_return).grid(row=1, column=0, columnspan=2, pady=8)
+    tk.Button(w, text="Retourner", command=on_return, bg=DANGER_COLOR, fg=BUTTON_FG).grid(row=1, column=0, columnspan=2, pady=8)
 
 btn_frame_emp = tk.Frame(tab_emprunts)
 btn_frame_emp.pack(pady=6)
-tk.Button(btn_frame_emp, text="Emprunter", command=borrow_window).pack(side="left", padx=6)
-tk.Button(btn_frame_emp, text="Retour", command=return_window).pack(side="left", padx=6)
+tk.Button(btn_frame_emp, text="Emprunter", command=borrow_window, bg=PRIMARY_COLOR, fg=BUTTON_FG).pack(side="left", padx=6)
+tk.Button(btn_frame_emp, text="Retour", command=return_window, bg=DANGER_COLOR, fg=BUTTON_FG).pack(side="left", padx=6)
 
 # --- Reservations Tab ---
 tab_res = ttk.Frame(nb)
@@ -230,8 +248,8 @@ nb.add(tab_res, text="Réservations")
 res_cols = ("ISBN","Titre","Queue (emails)")
 tree_res = ttk.Treeview(tab_res, columns=res_cols, show="headings")
 for c in res_cols:
-    tree_res.heading(c, text=c)
-    tree_res.column(c, width=300)
+    tree_res.heading(c, text=c, anchor="center")
+    tree_res.column(c, width=300, anchor="center")
 tree_res.pack(fill="both", expand=True, padx=10, pady=10)
 
 def refresh_reservations():
@@ -256,12 +274,12 @@ def reserve_window():
             w.destroy()
         except Exception as ex:
             messagebox.showerror("Erreur", str(ex))
-    tk.Button(w, text="Réserver", command=on_reserve).grid(row=2, column=0, columnspan=2, pady=6)
+    tk.Button(w, text="Réserver", command=on_reserve, bg=PRIMARY_COLOR, fg=BUTTON_FG).grid(row=2, column=0, columnspan=2, pady=6)
 
 btn_frame_res = tk.Frame(tab_res)
 btn_frame_res.pack(pady=6)
-tk.Button(btn_frame_res, text="Nouveau réservation", command=reserve_window).pack(side="left", padx=6)
-tk.Button(btn_frame_res, text="Refresh", command=refresh_reservations).pack(side="left", padx=6)
+tk.Button(btn_frame_res, text="Nouveau réservation", command=reserve_window, bg=PRIMARY_COLOR, fg=BUTTON_FG).pack(side="left", padx=6)
+tk.Button(btn_frame_res, text="Refresh", command=refresh_reservations, bg=BUTTON_BG, fg=BUTTON_FG).pack(side="left", padx=6)
 
 # --- Reports Tab ---
 tab_reports = ttk.Frame(nb)
@@ -285,14 +303,23 @@ def refresh_reports():
         name = f"{member.prenom} {member.nom}" if member else email
         lines.append(f" - {name} ({ct})")
     lines.append("\nEmprunts en cours:")
-    for e in st["currently_borrowed"]:
-        lines.append(f" - ID {e.emprunt_id} | {e.book_isbn} | {e.member_email} | due {e.date_due}")
+    for e in mgr.overdue_emprunts():
+        book = mgr.books.get(e.book_isbn)
+        member = mgr.members.get(e.member_email)
+
+        book_name = book.title if book else "???"
+        member_name = f"{member.prenom} {member.nom}" if member else e.member_email
+        lines.append(
+        f" - ID {e.emprunt_id} | Livre: {book_name} | \n"
+        f"Membre: {member_name} | Emprunté le: {e.date_emprunt} | Due: {e.date_due}\n"
+        f"Contact information :{member.phone}| {member.email}\n"
+        f"_______________________________________________________________________________________\n")
     txt_report.delete("1.0", "end")
     txt_report.insert("1.0", "\n".join(lines))
 
 btn_frame_rep = tk.Frame(tab_reports)
 btn_frame_rep.pack(pady=6)
-tk.Button(btn_frame_rep, text="Générer rapport", command=refresh_reports).pack(side="left", padx=6)
+tk.Button(btn_frame_rep, text="Générer rapport", command=refresh_reports, bg=BUTTON_BG, fg=BUTTON_FG).pack(side="left", padx=6)
 
 # --- Utility refresh on start and buttons ---
 def refresh_all():
@@ -302,16 +329,41 @@ def refresh_all():
     refresh_reservations()
     refresh_reports()
 
-tk.Button(app, text="Refresh tout", command=refresh_all).pack(side="bottom", pady=6)
+tk.Button(app, text="Refresh tout", command=refresh_all, bg="#607D8B", fg=BUTTON_FG).pack(side="bottom", pady=6)
 
 # Show overdue warnings at startup
 def show_overdue_startup():
     overdue = mgr.overdue_emprunts()
-    if overdue:
-        lines = []
-        for e in overdue:
-            lines.append(f"ID: {e.emprunt_id} | ISBN: {e.book_isbn} | Membre: {e.member_email} | due: {e.date_due}")
-        messagebox.showwarning("Emprunts en retard", "\n".join(lines))
+    if not overdue:
+        return
+
+    # Custom popup window (larger)
+    w = tk.Toplevel(app)
+    w.title("Emprunts en retard")
+    w.geometry("650x400")  # Larger window
+    w.resizable(False, False)
+
+    tk.Label(w, text="LIST DES EMPRUNTS EN RETARD :", fg="red", font=("Arial", 12, "bold")).pack(pady=10)
+
+    txt = tk.Text(w, wrap="word", font=("Arial", 10))
+    txt.pack(fill="both", expand=True, padx=10, pady=10)
+
+    for e in overdue:
+        book = mgr.books.get(e.book_isbn)
+        member = mgr.members.get(e.member_email)
+
+        book_name = book.title if book else "???"
+        member_name = f"{member.prenom} {member.nom}" if member else e.member_email
+
+        txt.insert(
+            "end",
+            f"• ID emprunt : {e.emprunt_id}\n"
+            f"  Livre       : {book_name}\n"
+            f"  Membre      : {member_name}\n"
+            f"___________________________________________________\n"
+        )
+
+    tk.Button(w, text="Fermer", command=w.destroy, bg="#607D8B", fg="white").pack(pady=10)
 
 # initial load
 refresh_all()
