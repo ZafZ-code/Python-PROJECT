@@ -1,4 +1,4 @@
-# class.py
+
 import json
 from datetime import datetime, timedelta
 from collections import defaultdict
@@ -34,7 +34,7 @@ class Book:
         self.isbn = isbn
         self.year = year
         self.disponibility = bool(disponibility)
-        self.reservations = reservations or []  # list of member emails (queue)
+        self.reservations = reservations or []  
         self.borrow_count = borrow_count
 
     def to_dict(self):
@@ -84,7 +84,7 @@ class Emprunt:
         self.date_emprunt = date_emprunt
         self.date_due = date_due
         self.date_return = date_return
-        self.status = status  # ongoing / returned / cancelled
+        self.status = status  
 
     def to_dict(self):
         return {
@@ -111,9 +111,9 @@ class Emprunt:
 
 class LibraryManager:
     def __init__(self):
-        self.books = {}    # isbn -> Book
-        self.members = {}  # email -> Member
-        self.emprunts = {} # emprunt_id -> Emprunt
+        self.books = {}   
+        self.members = {} 
+        self.emprunts = {} 
         self._load_all()
 
     # Persistence
@@ -135,7 +135,6 @@ class LibraryManager:
         save_json(MEMBERS_FILE, [m.to_dict() for m in self.members.values()])
         save_json(EMPRUNTS_FILE, [e.to_dict() for e in self.emprunts.values()])
 
-    # Books
     def add_book(self, title, author, isbn, year):
         if isbn in self.books:
             raise ValueError("ISBN already exists")
@@ -145,7 +144,6 @@ class LibraryManager:
         return book
 
     def remove_book(self, isbn_or_title):
-        # can remove by isbn or title
         to_remove = None
         if isbn_or_title in self.books:
             to_remove = self.books[isbn_or_title]
@@ -156,7 +154,6 @@ class LibraryManager:
                     break
         if not to_remove:
             raise KeyError("Book not found")
-        # do not remove if currently borrowed
         for e in self.emprunts.values():
             if e.book_isbn == to_remove.isbn and e.status == "ongoing":
                 raise ValueError("Book currently borrowed; cannot remove")
@@ -171,7 +168,6 @@ class LibraryManager:
                 results.append(b)
         return results
 
-    # Members
     def add_member(self, nom, prenom, email, phone=""):
         if email in self.members:
             raise ValueError("Member with this email already exists")
@@ -183,7 +179,6 @@ class LibraryManager:
     def remove_member(self, email):
         if email not in self.members:
             raise KeyError("Member not found")
-        # do not remove if member has ongoing emprunts
         for e in self.emprunts.values():
             if e.member_email == email and e.status == "ongoing":
                 raise ValueError("Member has ongoing emprunts; cannot remove")
@@ -192,27 +187,21 @@ class LibraryManager:
 
     def list_members(self):
         return list(self.members.values())
-
-    # Emprunts (borrow / return)
     def borrow_book(self, book_isbn, member_email, days=14):
         if book_isbn not in self.books:
             raise KeyError("Book does not exist")
         if member_email not in self.members:
             raise KeyError("Member does not exist")
         book = self.books[book_isbn]
-        # If book is not available, automatically create reservation
         if not book.disponibility:
-            # add reservation for member if not already in queue
             if member_email in book.reservations:
                 raise ValueError("Member already in reservation queue")
             book.reservations.append(member_email)
             self._save_all()
             return {"reserved": True}
-        # If available but there is a reservation queue, only allow if member is first
         if book.reservations:
             if book.reservations[0] != member_email:
                 raise ValueError("Book reserved to another member")
-            # member is first, pop queue and proceed
             book.reservations.pop(0)
 
         borrow_id = str(uuid.uuid4())
@@ -233,19 +222,16 @@ class LibraryManager:
             raise ValueError("Emprunt already closed")
         empr.date_return = datetime.today().strftime(DATEFMT)
         empr.status = "returned"
-        # set book available unless there is reservation queue (then keep unavailable for next borrower)
         book = self.books.get(empr.book_isbn)
         if not book:
             raise KeyError("Book record missing")
         if book.reservations:
-            # assign to next reserved member: we leave book.disponibility False so next borrower will be allowed if they are first
             book.disponibility = False
         else:
             book.disponibility = True
         self._save_all()
         return empr
 
-    # Reservations: explicit reserve function (when book borrowed)
     def reserve_book(self, book_isbn, member_email):
         if book_isbn not in self.books:
             raise KeyError("Book does not exist")
@@ -257,7 +243,6 @@ class LibraryManager:
         book.reservations.append(member_email)
         self._save_all()
 
-    # Queries / Reports
     def overdue_emprunts(self):
         return [e for e in self.emprunts.values() if e.is_overdue()]
 
@@ -271,7 +256,6 @@ class LibraryManager:
         b = self.books.get(isbn)
         if not b:
             return None
-        # who borrowed?
         borrowed_by = None
         for e in self.emprunts.values():
             if e.book_isbn == isbn and e.status == "ongoing":
@@ -288,9 +272,7 @@ class LibraryManager:
         total_books = len(self.books)
         total_members = len(self.members)
         total_emprunts = len(self.emprunts)
-        # top borrowed books
         top_books = sorted(self.books.values(), key=lambda x: x.borrow_count, reverse=True)[:5]
-        # top members by number of emprunts (historical)
         count_by_member = defaultdict(int)
         for e in self.emprunts.values():
             count_by_member[e.member_email] += 1

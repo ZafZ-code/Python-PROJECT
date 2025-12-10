@@ -2,7 +2,7 @@
     {
         "title": "Clean Code",
         "author": "Robert C. Martin",
-        "isbn": "978-0132350884",
+        "isbn": "ISBN_1",
         "year": 2008,
         "disponibility": false,
         "reservations": [],
@@ -11,7 +11,7 @@
     {
         "title": "Harry Potter",
         "author": "J.K. Rowling",
-        "isbn": "978-0747532699",
+        "isbn": "ISBN_2",
         "year": 1997,
         "disponibility": true,
         "reservations": [],
@@ -20,7 +20,7 @@
     {
         "title": "The Hobbit",
         "author": "J.R.R. Tolkien",
-        "isbn": "978-0618260281",
+        "isbn": "ISBN_3",
         "year": 1937,
         "disponibility": false,
         "reservations": [],
@@ -29,7 +29,7 @@
     {
         "title": "Sherlock Holmes",
         "author": "Arthur Conan Doyle",
-        "isbn": "978-0486419731",
+        "isbn": "ISBN_4",
         "year": 1892,
         "disponibility": true,
         "reservations": [],
@@ -38,7 +38,7 @@
     {
         "title": "Atomic Habits",
         "author": "James Clear",
-        "isbn": "978-0735211292",
+        "isbn": "ISBN_5",
         "year": 2018,
         "disponibility": false,
         "reservations": [],
@@ -47,7 +47,7 @@
     {
         "title": "The Alchemist",
         "author": "Paulo Coelho",
-        "isbn": "978-0061122415",
+        "isbn": "ISBN_6",
         "year": 1988,
         "disponibility": false,
         "reservations": [],
@@ -56,7 +56,7 @@
     {
         "title": "Dune",
         "author": "Frank Herbert",
-        "isbn": "978-0441172719",
+        "isbn": "ISBN_7",
         "year": 1965,
         "disponibility": true,
         "reservations": [],
@@ -65,7 +65,7 @@
     {
         "title": "The Great Gatsby",
         "author": "F. Scott Fitzgerald",
-        "isbn": "978-0743273565",
+        "isbn": "ISBN_8",
         "year": 1925,
         "disponibility": false,
         "reservations": [],
@@ -74,7 +74,7 @@
     {
         "title": "The Da Vinci Code",
         "author": "Dan Brown",
-        "isbn": "978-0307474278",
+        "isbn": "ISBN_9",
         "year": 2003,
         "disponibility": true,
         "reservations": [],
@@ -83,7 +83,7 @@
     {
         "title": "1984",
         "author": "George Orwell",
-        "isbn": "978-0451524935",
+        "isbn": "ISBN_10",
         "year": 1949,
         "disponibility": false,
         "reservations": [],
@@ -92,7 +92,7 @@
     {
         "title": "The Power of Habit",
         "author": "Charles Duhigg",
-        "isbn": "978-0812981605",
+        "isbn": "ISBN_11",
         "year": 2012,
         "disponibility": false,
         "reservations": [],
@@ -101,7 +101,7 @@
     {
         "title": "Spider-Man: The Novel",
         "author": "Peter David",
-        "isbn": "978-1984817559",
+        "isbn": "ISBN_12",
         "year": 2021,
         "disponibility": false,
         "reservations": [],
@@ -110,7 +110,7 @@
     {
         "title": "Jumanji",
         "author": "Chris Van Allsburg",
-        "isbn": "978-0547372338",
+        "isbn": "ISBN_13",
         "year": 1981,
         "disponibility": false,
         "reservations": [],
@@ -119,7 +119,7 @@
     {
         "title": "James Bond: Casino Royale",
         "author": "Ian Fleming",
-        "isbn": "978-0141045233",
+        "isbn": "ISBN_14",
         "year": 1953,
         "disponibility": true,
         "reservations": [],
@@ -128,16 +128,16 @@
     {
         "title": "The Lord of the Rings",
         "author": "J.R.R. Tolkien",
-        "isbn": "978-0618517657",
+        "isbn": "ISBN_15",
         "year": 1954,
         "disponibility": false,
         "reservations": [],
         "borrow_count": 3
     },
     {
-        "title": "a song of ice and fire",
-        "author": "george r.r martin",
-        "isbn": "978-0553103540",
+        "title": "A Song of Ice and Fire",
+        "author": "George R. R. Martin",
+        "isbn": "ISBN_16",
         "year": 1996,
         "disponibility": true,
         "reservations": [],
